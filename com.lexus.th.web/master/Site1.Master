@@ -1,0 +1,210 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="com.lexus.th.web.master.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <%--<script src="build/SalsaCalendar.min.js"></script>--%>
+    <%--<link rel="stylesheet" href="SalsaCalendar.min.css">--%>
+
+    <link href="~/components/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/components/bootstrap-3.3.7-dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/components/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/components/metismenu-master/dist/metisMenu.min.css" rel="stylesheet" />
+    <link href="~/components/startbootstrap-sb-admin-2-gh-pages/dist/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="~/components/bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <style>
+        .datepicker {
+            z-index: 1050 !important;
+        }
+    </style>
+    <!-- JS -->
+    <script src="<%=Page.ResolveUrl("~/components/jquery-3.1.1.min.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/jquery-2.1.1.min.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/jquery.blockUI.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/bootstrap-3.3.7-dist/js/bootstrap.min.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/bootstrap-3.3.7-dist/js/bootstrap-datepicker.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/metismenu-master/dist/metisMenu.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/startbootstrap-sb-admin-2-gh-pages/dist/js/sb-admin-2.min.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/bootstrap-3.3.7-dist/js/moment.js")%>"></script>
+    <script src="<%=Page.ResolveUrl("~/components/bootstrap-3.3.7-dist/js/bootstrap-datetimepicker.js")%>"></script>
+
+
+    <%--<script type="text/javascript" src="../components/datepicker.js"></script>--%>
+    <!-- Script -->
+    <script type="text/javascript">
+        function IsNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        };
+        function IsNumberKeyTime(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 58))
+                return false;
+            return true;
+        };
+        function onlyNumbersWithDot(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode == 46)
+                return true
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        };
+    </script>
+    <!-- Style -->
+    <style type="text/css">
+        .pagination-ys {
+            /*display: inline-block;*/
+            padding-left: 0;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+            .pagination-ys table > tbody > tr > td {
+                display: inline;
+            }
+
+                .pagination-ys table > tbody > tr > td > a,
+                .pagination-ys table > tbody > tr > td > span {
+                    position: relative;
+                    float: left;
+                    padding: 8px 12px;
+                    line-height: 1.42857143;
+                    text-decoration: none;
+                    color: #dd4814;
+                    background-color: #ffffff;
+                    border: 1px solid #dddddd;
+                    margin-left: -1px;
+                }
+
+                .pagination-ys table > tbody > tr > td > span {
+                    position: relative;
+                    float: left;
+                    padding: 8px 12px;
+                    line-height: 1.42857143;
+                    text-decoration: none;
+                    margin-left: -1px;
+                    z-index: 2;
+                    color: #aea79f;
+                    background-color: #f5f5f5;
+                    border-color: #dddddd;
+                    cursor: default;
+                }
+
+                .pagination-ys table > tbody > tr > td:first-child > a,
+                .pagination-ys table > tbody > tr > td:first-child > span {
+                    margin-left: 0;
+                    border-bottom-left-radius: 4px;
+                    border-top-left-radius: 4px;
+                }
+
+                .pagination-ys table > tbody > tr > td:last-child > a,
+                .pagination-ys table > tbody > tr > td:last-child > span {
+                    border-bottom-right-radius: 4px;
+                    border-top-right-radius: 4px;
+                }
+
+                .pagination-ys table > tbody > tr > td > a:hover,
+                .pagination-ys table > tbody > tr > td > span:hover,
+                .pagination-ys table > tbody > tr > td > a:focus,
+                .pagination-ys table > tbody > tr > td > span:focus {
+                    color: #97310e;
+                    background-color: #eeeeee;
+                    border-color: #dddddd;
+                }
+    </style>
+
+    <title>Lexus</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">Lexus</a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <i class="fa fa-user fa-fw"></i>
+                    <asp:Label ID="lbUser" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lbVersion" runat="server" Text="V.2.0.0"></asp:Label>
+                </li>
+            </ul>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <%--                        <li>
+                            <a href=""><i class="glyphicon glyphicon-th-list"></i> Master<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=Page.ResolveUrl("~/pages/PageCustomer.aspx")%>"><i class="glyphicon glyphicon-user"></i> Customers</a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=Page.ResolveUrl("~/pages/PageNews.aspx")%>"><i class="glyphicon glyphicon-plus"></i> News</a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=Page.ResolveUrl("~/pages/PageEvent.aspx")%>"><i class="glyphicon glyphicon-plus"></i> Events</a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=Page.ResolveUrl("~/pages/PagePrivilege.aspx")%>"><i class="glyphicon glyphicon-plus"></i> Privilege</a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=Page.ResolveUrl("~/pages/PagePrivilegeCode.aspx")%>"><i class="glyphicon glyphicon-plus"></i> Privilege Code</a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=Page.ResolveUrl("~/pages/PagePrivilegeVerify.aspx")%>"><i class="glyphicon glyphicon-plus"></i> Privilege Verify</a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<%=Page.ResolveUrl("~/pages/PageCar.aspx")%>"><i class="glyphicon glyphicon-plus"></i> Car Model & Color</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="<%=Page.ResolveUrl("~/pages/UserManagement.aspx")%>"><i class="glyphicon glyphicon-user"></i> User Management</a>
+                        </li>--%>
+
+                        <asp:Literal runat="server" ID="menu"></asp:Literal>
+                        <li>
+                            <a href="<%=Page.ResolveUrl("~/Logout.aspx")%>"><i class="glyphicon glyphicon-log-out"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
